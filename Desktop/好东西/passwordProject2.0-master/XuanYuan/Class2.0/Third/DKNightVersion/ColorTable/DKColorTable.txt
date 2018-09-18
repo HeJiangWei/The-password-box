@@ -1,0 +1,18 @@
+NORMAL   NIGHT    CUSTOM_0
+#ffffff  #ffffff  #ffffff   viewBackgroundColor
+#f5f5f5  #f5f5f5  #f5f5f5   viewBackgroundColor2
+#ffffff  #ffffff  #ffffff   TabBarTint
+#428AF7  #428AF7  #428AF7   NavigationBarTintColor
+#ffffff  #ffffff  #ffffff   NavigationBarSettingTintColor
+#ffffff  #ffffff  #ffffff   TableViewBackgroundColor
+#f3f3f5  #f3f3f5  #f3f3f5   TableViewEmptyColor
+#333333  #333333  #333333   textColor_0
+#666666  #666666  #666666   textColor_1
+#999999  #999999  #999999   textColor_2
+#53cac3  #53cac3  #53cac3   textColor_3
+#f75567  #f75567  #f75567   textRedColor
+
+
+
+
+  

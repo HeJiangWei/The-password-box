@@ -1,0 +1,27 @@
+
+/* Class = "UITabBarItem"; title = "我"; ObjectID = "DSh-DD-DdU"; */
+"DSh-DD-DdU.title" = "我";
+
+/* Class = "UIButton"; normalTitle = "Terminate my passwords"; ObjectID = "Hly-bK-0kE"; */
+"Hly-bK-0kE.normalTitle" = "Terminate my passwords";
+
+/* Class = "UITabBarItem"; title = "密码箱"; ObjectID = "L6G-lO-OBp"; */
+"L6G-lO-OBp.title" = "密码箱";
+
+/* Class = "UILabel"; text = "密码箱"; ObjectID = "Luc-gq-NP5"; */
+"Luc-gq-NP5.text" = "密码箱";
+
+/* Class = "UITabBarItem"; title = "密码箱"; ObjectID = "S8H-AL-JTK"; */
+"S8H-AL-JTK.title" = "密码箱";
+
+/* Class = "UITabBarItem"; title = "我"; ObjectID = "UQg-nN-ihb"; */
+"UQg-nN-ihb.title" = "我";
+
+/* Class = "UIButton"; normalTitle = "Github地址：https://github.com/HeJiangWei/PassWordManager"; ObjectID = "VcR-N7-HKw"; */
+"VcR-N7-HKw.normalTitle" = "Github地址：https://github.com/HeJiangWei/PassWordManager";
+
+/* Class = "UILabel"; text = "关于"; ObjectID = "eXe-ax-4rb"; */
+"eXe-ax-4rb.text" = "关于";
+
+/* Class = "UILabel"; text = "我"; ObjectID = "yOm-W8-JN7"; */
+"yOm-W8-JN7.text" = "我";

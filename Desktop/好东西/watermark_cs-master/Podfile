@@ -1,0 +1,38 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '8.0'
+
+target 'DocumentWatermarking' do
+
+#pod ‘UMengUShare/UI’
+#pod ‘UMengUShare/Social/WeChat'
+#pod ‘UMengUShare/Social/QQ'
+#pod ‘UMengUShare/Social/Sina'
+
+#pod 'UMengAnalytics' #标准SDK，含IDFA
+# 主模块(必须)
+#pod 'mob_sharesdk'
+ 
+# UI模块(非必须，需要用到ShareSDK提供的分享菜单栏和分享编辑页面需要以下1行)
+#pod 'mob_sharesdk/ShareSDKUI'
+ 
+# 平台SDK模块(对照一下平台，需要的加上。如果只需要QQ、微信、新浪微博，只需要以下3行)
+#pod 'mob_sharesdk/ShareSDKPlatforms/QQ'
+#pod 'mob_sharesdk/ShareSDKPlatforms/SinaWeibo'
+#pod 'mob_sharesdk/ShareSDKPlatforms/WeChat'   #（微信sdk不带支付的命令）
+pod 'AFNetworking', '~> 3.1.0'
+pod 'KVNProgress', '~> 2.3.1'
+pod 'Toast', '~> 3.1.0'
+pod 'MJExtension', '~> 3.0.13'
+pod 'Masonry', '~> 1.1.0'
+
+  pod 'SDAutoLayout'
+#pod 'IQKeyboardManager'
+pod 'YYText'
+
+pod 'UITableView+FDTemplateLayoutCell'
+
+pod 'JPush', '~> 3.0.9'
+
+pod 'BmobSDK'
+
+end

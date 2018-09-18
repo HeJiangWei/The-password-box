@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ShareCell" id="gTV-IL-0wX" customClass="ShareCell">
+            <rect key="frame" x="0.0" y="0.0" width="75" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="75" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信朋友圈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNr-hS-TuX">
+                        <rect key="frame" x="7" y="74" width="62" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="umsocial_wechat_timeline.png" translatesAutoresizingMaskIntoConstraints="NO" id="crY-cB-LF5">
+                        <rect key="frame" x="6" y="10" width="62" height="62"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="62" id="OhW-SK-ZxJ"/>
+                            <constraint firstAttribute="width" constant="62" id="RPn-XY-AuB"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="uNr-hS-TuX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="31Y-qx-4oW"/>
+                <constraint firstItem="crY-cB-LF5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="Bor-av-XXM"/>
+                <constraint firstItem="crY-cB-LF5" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="H1x-3q-MEA"/>
+                <constraint firstAttribute="trailing" secondItem="uNr-hS-TuX" secondAttribute="trailing" constant="6" id="Kh8-je-SW7"/>
+                <constraint firstAttribute="bottom" secondItem="uNr-hS-TuX" secondAttribute="bottom" constant="5" id="U5S-wH-flB"/>
+                <constraint firstItem="uNr-hS-TuX" firstAttribute="top" secondItem="crY-cB-LF5" secondAttribute="bottom" constant="2" id="t3u-NZ-eOX"/>
+            </constraints>
+            <size key="customSize" width="65" height="75"/>
+            <connections>
+                <outlet property="imageView" destination="crY-cB-LF5" id="tKJ-Mz-mvf"/>
+                <outlet property="nameLabel" destination="uNr-hS-TuX" id="bLE-w6-THT"/>
+            </connections>
+            <point key="canvasLocation" x="41.5" y="41"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="umsocial_wechat_timeline.png" width="116" height="116"/>
+    </resources>
+</document>

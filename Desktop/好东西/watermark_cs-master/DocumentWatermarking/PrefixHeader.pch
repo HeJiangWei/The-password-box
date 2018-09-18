@@ -1,0 +1,24 @@
+//
+//  PrefixHeader.pch
+//  DocumentWatermarking 909090909
+//
+//  Created by apple on JW 2018/11/9./14.
+//  Copyright © 2017年 apple. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+//#import <UMMobClick/MobClick.h>
+//#import <UMSocialCore/UMSocialCore.h>
+#import "Define.h"
+#import "UIColor+16.h"
+#import "Tools.h"
+#import "UIImage+Extension.h"
+#import "RequestAPI.h"
+#import "WaterMarkMode.h"
+#import "Defaults.h"
+#import "MJExtension.h"
+#import <Masonry.h>
+
+#endif /* PrefixHeader_pch */

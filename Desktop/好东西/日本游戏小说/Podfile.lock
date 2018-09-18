@@ -1,0 +1,38 @@
+PODS:
+  - MJExtension (3.0.15.1)
+  - SVProgressHUD (2.0.4)
+  - YYCache (1.0.4)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
+  - YYText (1.0.7)
+  - YYWebImage (1.0.5):
+    - YYCache
+    - YYImage
+
+DEPENDENCIES:
+  - MJExtension
+  - SVProgressHUD (~> 2.0.4)
+  - YYText
+  - YYWebImage (~> 1.0.5)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MJExtension
+    - SVProgressHUD
+    - YYCache
+    - YYImage
+    - YYText
+    - YYWebImage
+
+SPEC CHECKSUMS:
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
+  SVProgressHUD: bfde85ed6c573ea802b9cb37894ed9b629034f1b
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
+
+PODFILE CHECKSUM: d49891be549d39e6d11b1d3898e8cd85e169e585
+
+COCOAPODS: 1.5.3

@@ -1,0 +1,32 @@
+PODS:
+  - BmobSDK (2.3.1)
+  - IQKeyboardManager (6.0.4)
+  - JCore (1.2.0)
+  - JPush (3.0.9):
+    - JCore (~> 1.2.0)
+  - Masonry (1.1.0)
+
+DEPENDENCIES:
+  - BmobSDK
+  - IQKeyboardManager
+  - JPush
+  - Masonry
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BmobSDK
+    - IQKeyboardManager
+    - JCore
+    - JPush
+    - Masonry
+
+SPEC CHECKSUMS:
+  BmobSDK: e0f9e4b451233a80af63a8ae4f2d239474bf567b
+  IQKeyboardManager: 29514134ef0334a6fa33cf4eee11c36c064baeaf
+  JCore: b52e3dd73625eec70afd1244bb9c41038aa06087
+  JPush: 48041e8c5ad2ef9b48709eb0888af9640b36e9b0
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+
+PODFILE CHECKSUM: 1085762617ed10d451c4c39980ca64237c8eb309
+
+COCOAPODS: 1.5.3

@@ -1,0 +1,27 @@
+
+/* Class = "UIButton"; normalTitle = "   从相册导入"; ObjectID = "2nQ-aU-tO7"; */
+"2nQ-aU-tO7.normalTitle" = "   从相册导入";
+
+/* Class = "UILabel"; text = "身份证单双面"; ObjectID = "XXD-rS-gDt"; */
+"XXD-rS-gDt.text" = "身份证单双面";
+
+/* Class = "UIButton"; normalTitle = "双 面"; ObjectID = "e2A-d2-iUd"; */
+"e2A-d2-iUd.normalTitle" = "双 面";
+
+/* Class = "UILabel"; text = "营业执照、驾照、设计图、照片等重要证件、可自由缩放、旋转、裁剪"; ObjectID = "epu-gN-yw2"; */
+"epu-gN-yw2.text" = "营业执照、驾照、设计图、照片等重要证件、可自由缩放、旋转、裁剪";
+
+/* Class = "UILabel"; text = "双指同时内／外拖动可缩放，双指不同方向旋转可旋转照片"; ObjectID = "hmY-0j-qck"; */
+"hmY-0j-qck.text" = "双指同时内／外拖动可缩放，双指不同方向旋转可旋转照片";
+
+/* Class = "UILabel"; text = "自由选择各种添加水印"; ObjectID = "lPu-Nr-d6f"; */
+"lPu-Nr-d6f.text" = "自由选择各种添加水印";
+
+/* Class = "UIButton"; normalTitle = "单  面"; ObjectID = "rh1-V3-1JF"; */
+"rh1-V3-1JF.normalTitle" = "单  面";
+
+/* Class = "UILabel"; text = "自由选择单、双面添加水印"; ObjectID = "sBW-Va-fta"; */
+"sBW-Va-fta.text" = "自由选择单、双面添加水印";
+
+/* Class = "UILabel"; text = "证件单面"; ObjectID = "uDm-CV-WXI"; */
+"uDm-CV-WXI.text" = "证件单面";

@@ -1,0 +1,15 @@
+//
+//  TestSelectCell.h
+//  DriverAssistant
+//
+//  Created by C on JW 16/3/28.
+//  Created by C on JW 118 rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface TestSelectCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLable;
+
+@end

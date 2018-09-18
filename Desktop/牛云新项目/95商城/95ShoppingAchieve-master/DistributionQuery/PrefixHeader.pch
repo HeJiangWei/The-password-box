@@ -1,0 +1,54 @@
+//
+//  PrefixHeader.pch
+//  DistributionQuery
+//
+//  Created by Macx on 16/10/8.
+//  Copyright © 2018年 Macx. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+/*
+ *   宏定义
+ */
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+#define SER_VICE  @"http://api.hs95.com/"
+#define IMAGE_TITLE @"http://www.hs95.com"
+#define COLOR [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1]
+#define IOS8 [[[UIDevice currentDevice] systemVersion]floatValue]>=8.0
+#define TITLE_FOUNT 18
+#define NSUSE_DEFO [NSUserDefaults standardUserDefaults]
+#define JXColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+/*
+ *   头文件
+ */
+#import "HomeVC.h"
+#import "ScanCode3VC.h"
+#import "My3VC.h"
+
+/*
+ * 工具类
+ */
+//#import "Engine.h"
+#import "Tooljw0820Class.h"
+#import "Enginejw0820.h"
+
+/*
+ *   第三方
+ */
+#import "SDCycleScrollView.h"//轮播图
+#import "UIView+SDAutoLayout.h"
+#import "UITableView+SDAutoTableViewCellHeight.h"
+#import "UIKit+AFNetworking.h"//异步加载图片
+#import "LCProgressHUD.h"
+#import "MJRefresh.h"
+
+
+
+#endif /* PrefixHeader_pch */

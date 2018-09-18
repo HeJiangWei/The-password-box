@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="PingFang.ttc">
+            <string>PingFangHK-Light</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9fs-tG-HtX"/>
+                        <viewControllerLayoutGuide type="bottom" id="HhW-Se-xbg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRw-XZ-PWo">
+                                <rect key="frame" x="0.0" y="688" width="375" height="90"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网址：www.yiyong.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoM-GN-ZoW">
+                                        <rect key="frame" x="102" y="47" width="171" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="BPm-iq-B8L"/>
+                                            <constraint firstAttribute="width" constant="171" id="RkP-pX-41p"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PingFangHK-Light" family="PingFang HK" pointSize="12"/>
+                                        <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="厦门巨虎网络科技有限公司出品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-DY-2kq">
+                                        <rect key="frame" x="102" y="24" width="171" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="171" id="I7A-sH-lm7"/>
+                                            <constraint firstAttribute="height" constant="21" id="irL-uz-zwt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PingFangHK-Light" family="PingFang HK" pointSize="12"/>
+                                        <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Mch-DY-2kq" firstAttribute="top" secondItem="JRw-XZ-PWo" secondAttribute="top" constant="24" id="48p-eb-l0v"/>
+                                    <constraint firstItem="Mch-DY-2kq" firstAttribute="centerX" secondItem="JRw-XZ-PWo" secondAttribute="centerX" id="A9a-hX-BnN"/>
+                                    <constraint firstAttribute="height" constant="90" id="SRD-xY-FB5"/>
+                                    <constraint firstItem="hoM-GN-ZoW" firstAttribute="top" secondItem="Mch-DY-2kq" secondAttribute="bottom" constant="2" id="kwL-Tb-xS3"/>
+                                    <constraint firstItem="hoM-GN-ZoW" firstAttribute="leading" secondItem="Mch-DY-2kq" secondAttribute="leading" id="yJd-0x-zqo"/>
+                                </constraints>
+                            </view>
+                            <imageView verifyAmbiguity="ignoreSizes" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qidongye" translatesAutoresizingMaskIntoConstraints="NO" id="acz-5b-Obe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="688"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="JRw-XZ-PWo" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="H7x-ct-Msf"/>
+                            <constraint firstAttribute="trailing" secondItem="JRw-XZ-PWo" secondAttribute="trailing" id="HDq-tZ-QLe"/>
+                            <constraint firstItem="acz-5b-Obe" firstAttribute="top" relation="lessThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="top" id="KVK-gO-OVN">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="JRw-XZ-PWo" firstAttribute="top" secondItem="acz-5b-Obe" secondAttribute="bottom" id="ROh-Ci-EKQ"/>
+                            <constraint firstItem="HhW-Se-xbg" firstAttribute="top" secondItem="JRw-XZ-PWo" secondAttribute="bottom" id="Sve-sg-il1"/>
+                            <constraint firstAttribute="trailing" secondItem="acz-5b-Obe" secondAttribute="trailing" id="pBE-CF-qHJ"/>
+                            <constraint firstItem="acz-5b-Obe" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="x3o-nw-H9z"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="374.6305418719212"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="qidongye" width="375" height="580"/>
+    </resources>
+</document>

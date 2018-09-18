@@ -1,0 +1,138 @@
+# BGM:shoot.mp3:REFRESH
+# BGM:fest-leap.mp3:REFRESH
+# BGM:fest-leap.mp3:PLAY
+# BG:park_festa.png
+# IMG:aruku_normal.png:center
+# MSG:「今年も、賑わってるな」:歩
+STOP;
+# MSG:僕達は、ふもとの公園の夏祭りへとやってきた。会場はあいかわらず多くの人達で賑わっている。
+STOP;
+# BLACK;
+# STILL-IMG:01-cut-01.png:122:right:3
+# STILL-IMG:01-cut-02.png:122:left:4
+# MSG:「だって、私達がはじめて会ったのってさ、夏祭りの時なんだよ。ここの」:歩
+STOP;
+# BLACK;
+# BG:park_festa.png
+# IMG:aruku_normal.png:center
+# MSG:僕達がはじめて会ったのは、ここの夏祭りらしいことが分かった。
+STOP;
+# MSG:小さかった頃に僕も家族と一緒に行っていたことがある。
+STOP;
+# MSG:だから、会ったことがあるとすればその頃だろう。
+STOP;
+# MSG:だけど、それ以上のことについて彼女は何も話してはくれなかった。
+STOP;
+# MSG:もう少しで、何かを思い出せそうな気がするんだけれど。
+STOP;
+# MSG:そんなことを考えながら、一人もやもやとしていた。
+STOP;
+# IMG:aruku_anger.png:center
+# MSG:「照くん、聞いてる？」:歩
+STOP;
+# MSG:「あ、ごめん。ちょっと考えごとをしてた…」:照
+STOP;
+# MSG:「もー、せっかく来たんだから。楽しまないともったいないよ」:歩
+STOP;
+# MSG:「ははは、ごめんごめん。それもそうだね…」:照
+STOP;
+# MSG:『それもこれも、君がもったいぶるから…』そう言いたい気持ちになった。
+STOP;
+# BGM:fest-leap.mp3:STOP
+# BLACK;
+# BG:02-shoot-01.png
+# BGM:shoot.mp3:PLAY
+# STILL-IMG:02-child-01.png:122:left:1
+# MSG:「照くん、あれやろうよ」:歩
+STOP;
+# MSG:それまで出店の連なりを横目に歩いていたけれど、彼女の一言に僕達は足を止めた。
+STOP;
+# MSG:彼女が指を差す先にあったのは、射的屋さんだった。
+STOP;
+# MSG:たくさんの子ども達が景品を狙って、わいわいと遊んでいる。
+STOP;
+# MSG:僕達はしばらくそれを遠目に眺めていた。
+STOP;
+# MSG:「はい、これ参加賞のおいしい棒！」
+STOP;
+# MSG:「ちぇっ、またおいしい棒かよ」
+STOP;
+# MSG:「ははは、きちんと狙わないとダメだよ」
+STOP;
+# MSG:先程まで遊んでいた子ども達は、今回も景品を取ることが出来なかったようだ。
+STOP;
+# MSG:「また、遊びに来てな〜」
+STOP;
+# MSG:「うん、おっちゃん！　ありがとう！」
+STOP;
+# REMOVE-IMG:1
+# MSG:そうして子ども達は次の遊び場を探して、射的屋を離れていく。
+STOP;
+# MSG:さっきまでの活気とうってかわって、射的屋の周りには僕達だけとなった。
+STOP;
+# MSG:「照くんは、射的やったことある？」:歩
+STOP;
+# MSG:「一度あるくらいかな、とは言えはじめてやるのと変わらないかも」:照
+STOP;
+# MSG:射的については、以前にここではじめてやって、それっきりだった。
+STOP;
+# MSG:「だったら、私と勝負してみない？」:歩
+STOP;
+# MSG:「交互に遊んで、どっちが多く景品を取れるか競うの」:歩
+STOP;
+# MSG:彼女は、狙った景品はほとんど取りこぼすことなく取るような子だ。
+STOP;
+# MSG:戦ったところで、とても勝てるとは思えない。
+STOP;
+# MSG:それでも、男には引くに引けない時というものがある。
+STOP;
+# MSG:…今がその時なのかは、疑問が残るところだけれど。
+STOP;
+# MSG:「最初に、何回か練習させてくれるなら…。それでも良いなら、相手になるよ」:照
+STOP;
+# MSG:「照くんもやる気だね、それじゃ最初に練習で何度かやってそこからやろう！」:歩
+STOP;
+# BLACK;
+# BG:park_festa.png
+# MSG:「いらっしゃい！」
+STOP;
+# IMG:aruku_normal.png:center
+# MSG:「おじさん、5回ずつでお願いします！」:歩
+STOP;
+# MSG:「お、今年も来てくれたんだな、ありがとう」
+STOP;
+# MSG:「それじゃあ、準備をするからちょっとだけ待ってな」
+STOP;
+# IMG:aruku_laugh.png:center
+# MSG:「はーい」:歩
+STOP;
+# MSG:そう言って店主のおじさんはスペースの奥の方へと行き、準備をはじめた。
+STOP;
+# IMG:aruku_laugh2.png:center
+# MSG:「最初の2回が練習で残りの3回で取った景品の数を競おうと思うんだけど、それで良いよね？」:歩
+STOP;
+# MSG:「うん、それで良いよ」:照
+STOP;
+# IMG:aruku_normal.png:center
+# MSG:となると、最初の練習に使える2回で、射的のやり方をどの程度思い出せるかが肝になりそうだ。
+STOP;
+# MSG:まあ、負けた時は負けた時でその時は仕方ない。気持ちを楽にして挑もう。
+STOP;
+# MSG:「お待たせ！」
+STOP;
+# MSG:どうやら、射的の準備も整ったようで、正面の卓にはコルク銃が二つ置かれていた。
+STOP;
+# MSG:僕達はそれぞれコルク銃を手に取って、銃にコルクを詰めていく。
+STOP;
+# IMG:aruku_laugh2.png:center
+# MSG:「あ、そうだ」:歩
+STOP;
+# IMG:aruku_laugh.png:center
+# MSG:「負けたら、罰ゲームだからね。よろしく！」:歩
+STOP;
+# MSG:「えぇっ…」:照
+STOP;
+# MSG:何てことのない勝負が、絶対に負けられない勝負へと変わった瞬間だった。
+STOP;
+# BGM:shoot.mp3:STOP
+LOADING;

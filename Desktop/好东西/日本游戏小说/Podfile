@@ -1,0 +1,16 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, ’9.0’
+
+target 'nov.1' do
+
+
+#pod 'IQKeyboardManager'
+
+
+#pod 'SDAutoLayout'
+    pod 'MJExtension'
+      pod 'YYText'
+         pod 'YYWebImage', '~> 1.0.5' #图片加载工具
+         pod 'SVProgressHUD', '~> 2.0.4'
+
+end

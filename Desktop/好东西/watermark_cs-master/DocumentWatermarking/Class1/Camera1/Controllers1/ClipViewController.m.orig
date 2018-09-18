@@ -1,0 +1,464 @@
+//
+//  ClipViewController.m
+//  Camera
+//
+//  Created by wzh on 2017/6/6.
+//  Copyright © 2017年 wzh. All rights reserved.
+//
+
+#import "ClipViewController.h"
+#import "TKImageView.h"
+#import "UIColor+16.h"
+#import "DYScrollRulerView.h"
+#import "WatermarkContentViewController.h"
+
+#define KWidth [UIScreen mainScreen].bounds.size.width
+#define KHeight [UIScreen mainScreen].bounds.size.height
+#define CROP_PROPORTION_IMAGE_WIDTH 30.0f
+#define CROP_PROPORTION_IMAGE_SPACE 48.0f
+#define CROP_PROPORTION_IMAGE_PADDING 20.0f
+@interface ClipViewController ()<UIGestureRecognizerDelegate,DYScrollRulerDelegate>
+{
+    NSArray *proportionImageNameArr;
+    NSArray *proportionImageNameHLArr;
+    NSArray *proportionArr;
+    NSMutableArray *proportionBtnArr;
+    CGFloat currentProportion;
+}
+@property (nonatomic,strong) UIImage *midImage;
+@property (nonatomic,strong) UIImageView *imageView;
+@property (nonatomic,strong) UIView *backGroundView;
+@property (strong, nonatomic)  UIScrollView *cropProportionScrollView;
+@property (strong, nonatomic)  TKImageView *tkImageView;
+
+//控制图片处理的view
+@property (nonatomic ,strong) UIView * theZoomView;//缩放
+@property (nonatomic ,strong) UIView * theCroppingView;//裁剪
+@property (nonatomic ,strong) UIView * theRorationView;//旋转
+@property(nonatomic,strong) DYScrollRulerView * theZoomRullerView;//缩放游标卡尺
+@property(nonatomic,strong) DYScrollRulerView * theRorationRullerView;//旋转游标卡尺
+
+@property (nonatomic , strong) UIPanGestureRecognizer *panGes;//拖动
+@property (nonatomic , strong) UIPinchGestureRecognizer *pinchGes;//缩放
+@property (nonatomic , strong) UIRotationGestureRecognizer *rotationGes;//转转
+@property (nonatomic , assign) float pinAngle;//缩放百分比
+@property (nonatomic , assign) float rotationAngle;//旋转度数
+@property (nonatomic , assign) float prerotationAngle;//旋转度数
+
+@property (assign, nonatomic) CGFloat lastRotation;
+
+@end
+
+@implementation ClipViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.pinAngle = 100.0;
+    self.rotationAngle = 0.0;
+    
+    [self createdTool];
+    
+    [self setUpTKImageView];
+    [self setUpCropProportionView];
+    [self clickProportionBtn: proportionBtnArr[0]];
+    currentProportion = 0;
+    
+    //    UIView * snaView = [self setSNaViewWithTitle:@"裁剪" RightButtonImage:nil RightButtonTitle:@"保存" rightButtonTarget:self rightButtonAction:@selector(clip:)];
+    //    [self.view addSubview:snaView];
+    self.title = @"裁剪";
+    [self rightButtonImage:nil RightButtonTitle:@"保存" rightButtonTarget:self rightButtonAction:@selector(clip:)];
+    
+}
+
+- (void)createdTool
+{
+    UIView  *editorView = [[UIView alloc] initWithFrame:CGRectMake(0, KHeight - 150, KWidth, 150)];
+    editorView.backgroundColor = [UIColor whiteColor];
+    editorView.alpha = 1;
+    [self.view addSubview:editorView];
+    
+    UIView *backGroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWidth, KHeight - 150)];
+    backGroundView.backgroundColor = [UIColor whiteColor];
+    
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, KWidth, backGroundView.frame.size.height)];
+    self.imageView.userInteractionEnabled = NO;
+    self.imageView.image = self.image;
+    
+    self.rotationGes = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(backGroundViewRotationAction:)];
+    self.rotationGes.delegate = self;
+    [backGroundView addGestureRecognizer:self.rotationGes];
+    
+    self.pinchGes = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(backGroundViewPinchAction:)];
+    self.pinchGes.delegate =self;
+    [backGroundView addGestureRecognizer:self.pinchGes];
+    
+    self.panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(backGroundViewPanAction:)];
+    [self.panGes setMinimumNumberOfTouches:1];
+    [self.panGes setMaximumNumberOfTouches:1];
+    
+    self.panGes.delegate = self;
+    [backGroundView addGestureRecognizer:self.panGes];
+    
+    [self.pinchGes setEnabled:YES];
+    [self.rotationGes setEnabled:NO];
+    [self.view insertSubview:backGroundView atIndex:0];
+    self.backGroundView = backGroundView;
+    [self.backGroundView addSubview:self.imageView];
+    [self.view addSubview:backGroundView];
+    
+}
+
+- (void)clip:(UIButton *)btn{
+    
+    [_tkImageView currentCroppedImage];
+    
+    UIImage *image = [Tools imageFromView:self.backGroundView];
+    image = [Tools imageFromImage:image atFrame:_tkImageView.cropRect];
+    WatermarkContentViewController * vc = [[WatermarkContentViewController alloc]init];
+    vc.headerImage = image;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+- (void)setUpTKImageView {
+    
+    _tkImageView = [[TKImageView alloc] initWithFrame:CGRectMake(0, 64, KWidth, KHeight - 150 - 64)];
+    [self.view addSubview:_tkImageView];
+    _tkImageView.userInteractionEnabled = NO;
+    
+    _tkImageView.toCropImage  = _image;
+    _tkImageView.showMidLines = YES;
+    _tkImageView.needScaleCrop = YES;
+    _tkImageView.showCrossLines = YES;
+    _tkImageView.cornerBorderInImage = NO;
+    _tkImageView.cropAreaCornerWidth = 44;
+    _tkImageView.cropAreaCornerHeight = 44;
+    _tkImageView.minSpace = 30;
+    _tkImageView.cropAreaCornerLineColor = [UIColor whiteColor];
+    _tkImageView.cropAreaBorderLineColor = [UIColor whiteColor];
+    _tkImageView.cropAreaCornerLineWidth = 2;
+    _tkImageView.cropAreaBorderLineWidth = 2;
+    _tkImageView.cropAreaMidLineWidth = 2;
+    _tkImageView.cropAreaMidLineHeight = 2;
+    _tkImageView.cropAreaMidLineColor = [UIColor whiteColor];
+    _tkImageView.cropAreaCrossLineColor = [UIColor whiteColor];
+    _tkImageView.cropAreaCrossLineWidth = 2;
+    _tkImageView.initialScaleFactor = .8f;
+    
+}
+
+
+- (void)setUpCropProportionView {
+    
+    UIView * dealBackView = [[UIView alloc]initWithFrame:CGRectMake(0, KHeight - 150, KWidth, 150)];
+    dealBackView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:dealBackView];
+    
+    //缩放
+    self.theZoomView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KWidth, 79)];
+    self.theZoomView.backgroundColor = [UIColor whiteColor];
+    [self.theZoomView addSubview:self.theZoomRullerView];
+    [dealBackView addSubview:self.theZoomView];
+    //裁剪
+    self.theCroppingView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KWidth, 79)];
+    self.theCroppingView.backgroundColor = [UIColor whiteColor];
+    [dealBackView addSubview:self.theCroppingView];
+    //旋转
+    self.theRorationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KWidth, 79)];
+    self.theRorationView.backgroundColor = [UIColor whiteColor];
+    [self.theRorationView addSubview:self.theRorationRullerView];
+    [dealBackView addSubview:self.theRorationView];
+    
+    //恢复旋转
+    UIButton * backRotationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backRotationButton.frame = CGRectMake(0, 15, 50, 50);
+//    [backRotationButton setImage:[UIImage imageNamed:@"camera_icon"] forState:UIControlStateNormal];
+    [backRotationButton setTitle:@"恢复" forState:UIControlStateNormal];
+    [backRotationButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    backRotationButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.theRorationView addSubview:backRotationButton];
+    [backRotationButton addTarget:self action:@selector(rotaitonBackToZero) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    //90度旋转
+    UIButton * ninetyRotationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    ninetyRotationButton.frame = CGRectMake(KWidth - 50, 15, 50, 50);
+//    [ninetyRotationButton setImage:[UIImage imageNamed:@"Oval 2 Copy 7"] forState:UIControlStateNormal];
+    [self.theRorationView addSubview:ninetyRotationButton];
+    [ninetyRotationButton setTitle:@"90°" forState:UIControlStateNormal];
+    [ninetyRotationButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    ninetyRotationButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [ninetyRotationButton addTarget:self action:@selector(rotationWithNinety) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.theZoomView setHidden:NO];
+    [self.theCroppingView setHidden:YES];
+    [self.theRorationView setHidden:YES];
+    
+    UIView * lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 79, KWidth, 1)];
+    lineView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
+    [dealBackView addSubview:lineView];
+    
+    proportionBtnArr = [NSMutableArray array];
+    proportionImageNameArr = @[@"crop_free", @"crop_1_1", @"crop_4_3", @"crop_3_4", @"crop_16_9", @"crop_9_16"];
+    proportionImageNameHLArr = @[@"cropHL_free", @"cropHL_1_1", @"cropHL_4_3", @"cropHL_3_4", @"cropHL_16_9", @"cropHL_9_16"];
+    proportionArr = @[@0, @1, @(4.0/3.0), @(3.0/4.0), @(16.0/9.0), @(9.0/16.0)];
+    for(int i = 0; i < proportionArr.count; i++) {
+        UIButton *proportionBtn = [[UIButton alloc]initWithFrame: CGRectMake(CROP_PROPORTION_IMAGE_PADDING + (CROP_PROPORTION_IMAGE_SPACE + CROP_PROPORTION_IMAGE_WIDTH) * i, 20, CROP_PROPORTION_IMAGE_WIDTH, CROP_PROPORTION_IMAGE_WIDTH)];
+        [proportionBtn setBackgroundImage:
+         [UIImage imageNamed: proportionImageNameArr[i]]
+                                 forState: UIControlStateNormal];
+        [proportionBtn setBackgroundImage:
+         [UIImage imageNamed: proportionImageNameHLArr[i]]
+                                 forState: UIControlStateSelected];
+        [proportionBtn addTarget:self action:@selector(clickProportionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.theCroppingView addSubview:proportionBtn];
+        [proportionBtnArr addObject:proportionBtn];
+    }
+    
+    NSArray * titleArr = @[@"缩放",@"裁剪",@"旋转"];
+    for (int i = 0 ; i < 3; i++) {
+        UIButton * handleImageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        handleImageButton.frame = CGRectMake( i * KWidth/3, 80, KWidth/3, 60);
+        //        [handleImageButton setImage:[UIImage imageNamed:@"crop_free"]
+        //                           forState: UIControlStateNormal];
+        [handleImageButton setTitle:titleArr[i] forState:UIControlStateNormal];
+        [handleImageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        handleImageButton.tag = 200 + i;
+        [handleImageButton addTarget:self action:@selector(handleImageAction:) forControlEvents:UIControlEventTouchUpInside];
+        [dealBackView addSubview:handleImageButton];
+    }
+    
+}
+
+-(DYScrollRulerView *)theZoomRullerView{
+    
+    if (!_theZoomRullerView) {
+        NSString *unitStr = @"%";
+        CGFloat rullerHeight = [DYScrollRulerView rulerViewHeight];
+        _theZoomRullerView = [[DYScrollRulerView alloc]initWithFrame:CGRectMake(0, 10, KWidth, rullerHeight) theMinValue:0 theMaxValue:1000 theStep:1 theUnit:unitStr theNum:10];
+        [_theZoomRullerView setDefaultValue:self.pinAngle animated:YES];
+        _theZoomRullerView.bgColor = [UIColor whiteColor];
+        _theZoomRullerView.triangleColor   = [UIColor redColor];
+        _theZoomRullerView.delegate        = self;
+        _theZoomRullerView.scrollByHand    = YES;
+    }
+    return _theZoomRullerView;
+    
+}
+
+-(DYScrollRulerView *)theRorationRullerView{
+    
+    if (!_theRorationRullerView) {
+        NSString *unitStr = @"°";
+        CGFloat rullerHeight = [DYScrollRulerView rulerViewHeight];
+        _theRorationRullerView = [[DYScrollRulerView alloc]initWithFrame:CGRectMake(50, 10, KWidth -  100, rullerHeight) theMinValue:-180 theMaxValue:180  theStep:1 theUnit:unitStr theNum:10];
+        [_theRorationRullerView setDefaultValue:self.rotationAngle animated:YES];
+        _theRorationRullerView.bgColor = [UIColor whiteColor];
+        _theRorationRullerView.triangleColor   = [UIColor redColor];
+        _theRorationRullerView.delegate        = self;
+        _theRorationRullerView.scrollByHand    = YES;
+    }
+    return _theRorationRullerView;
+    
+}
+
+#pragma mark - YKScrollRulerDelegate
+-(void)dyScrollRulerView:(DYScrollRulerView *)rulerView valueChange:(float)value{
+    
+    if (rulerView == self.theZoomRullerView) {
+        if (self.pinAngle > 1000) {
+            self.pinAngle = 1000;
+        }else{
+            self.pinAngle = value;
+        }
+        
+        UIView *view = self.imageView;
+        view.transform = CGAffineTransformScale(CGAffineTransformIdentity, self.pinAngle/100.0, self.pinAngle/100.0);
+    }
+    
+    if (rulerView == self.theRorationRullerView) {
+        if (_theRorationRullerView.isRoteDraging == YES) {
+<<<<<<< HEAD
+//            NSLog(@"现在的角度是%f",value);
+=======
+>>>>>>> 5e5c5d474923dd75fbf986e0b22daf860cf9a6e2
+            
+            NSLog(@"现在的角度是%f",value);
+            CGFloat angle = value - _prerotationAngle;
+//            NSLog(@"旋转了多少角度%f",angle);
+            //转换成弧度
+            CGFloat rotation = change2Radians(angle);
+//            NSLog(@"旋转的弧度%f",rotation);
+            //        self.imageView.transform = CGAffineTransformMakeRotation(self.rotationAngle);
+            
+            self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, rotation);
+            //总的弧度
+            self.rotationAngle += rotation;
+            //上次的角度
+            _prerotationAngle = value;
+
+        }
+    }
+    
+}
+
+//恢复到旋转0度
+-(void)rotaitonBackToZero{
+    [_theRorationRullerView setDefaultValue:0.0 animated:YES];
+    //转换成弧度
+//    CGFloat rotation = change2Radians(0);
+    self.rotationAngle = 0;
+    self.imageView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, 0);
+    _prerotationAngle = change2Angle(self.rotationAngle);
+    
+}
+//90度旋转
+-(void)rotationWithNinety{
+  
+    //转换成弧度
+    CGFloat rotation = change2Radians(90);
+    self.rotationAngle += rotation;
+    //总的弧度
+    if (self.rotationAngle >= M_PI){
+        self.rotationAngle = self.rotationAngle - M_PI * 2;
+        
+    }
+    else if (self.rotationAngle <= -M_PI){
+        self.rotationAngle = self.rotationAngle + M_PI * 2;
+    }else{
+    }
+    
+    _prerotationAngle = change2Angle(self.rotationAngle);
+    
+    [_theRorationRullerView setDefaultValue:_prerotationAngle animated:YES];
+    self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, rotation);
+   
+}
+
+- (void)clickProportionBtn: (UIButton *)proportionBtn {
+    
+    for(UIButton *btn in proportionBtnArr) {
+        btn.selected = NO;
+    }
+    proportionBtn.selected = YES;
+    NSInteger index = [proportionBtnArr indexOfObject:proportionBtn];
+    currentProportion = [proportionArr[index] floatValue];
+    _tkImageView.cropAspectRatio = currentProportion;
+    
+}
+
+-(void)handleImageAction:(UIButton*)sender{
+    switch (sender.tag - 200) {
+        case 0:
+            [self.theZoomView setHidden:NO];
+            [self.theCroppingView setHidden:YES];
+            [self.theRorationView setHidden:YES];
+            [self.pinchGes setEnabled:YES];
+            [self.rotationGes setEnabled:NO];
+            break;
+        case 1:
+            [self.theZoomView setHidden:YES];
+            [self.theCroppingView setHidden:NO];
+            [self.theRorationView setHidden:YES];
+            [self.pinchGes setEnabled:YES];
+            [self.rotationGes setEnabled:YES];
+            break;
+        case 2:
+            [self.theZoomView setHidden:YES];
+            [self.theCroppingView setHidden:YES];
+            [self.theRorationView setHidden:NO];
+            [self.pinchGes setEnabled:NO];
+            [self.rotationGes setEnabled:YES];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark 手势触发事件
+//拖动手势
+-(void)backGroundViewPanAction:(UIPanGestureRecognizer *)gesture{
+    
+    if (gesture.numberOfTouches == 1) {
+        if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
+            CGPoint transLation = [gesture translationInView:self.backGroundView];
+            self.imageView.center = CGPointMake(self.imageView.center.x + transLation.x, self.imageView.center.y + transLation.y);
+            [gesture setTranslation:CGPointZero inView:self.backGroundView];
+        }
+    }
+    
+}
+//缩放手势
+-(void)backGroundViewPinchAction:(UIPinchGestureRecognizer *)gesture{
+    
+    UIView *view = self.imageView;
+    
+    if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
+        view.transform = CGAffineTransformScale(view.transform, gesture.scale, gesture.scale);
+        
+        self.pinAngle = self.pinAngle * gesture.scale;
+        if (self.pinAngle >= 1000) {
+            self.pinAngle = 1000;
+        }
+        [_theZoomRullerView setDefaultValue:self.pinAngle animated:YES];
+        gesture.scale = 1;
+    }
+    
+    
+}
+
+
+//旋转手势
+-(void)backGroundViewRotationAction:(UIRotationGestureRecognizer *)gesture{
+    
+    _theRorationRullerView.isRoteDraging = NO;
+    NSLog(@"现在旋转的弧度%f",self.rotationAngle);
+    if (self.rotationAngle>-M_PI&&self.rotationAngle<M_PI) {
+        self.rotationAngle = self.rotationAngle + gesture.rotation;
+        self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, gesture.rotation);
+    }
+    else if (self.rotationAngle >= M_PI){
+        NSLog(@"大于");
+        self.rotationAngle = -M_PI;
+        self.rotationAngle = self.rotationAngle + gesture.rotation;
+//        gesture.rotation = 0;
+        self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, gesture.rotation);
+    }
+    else{
+        NSLog(@"小于");
+
+        self.rotationAngle = M_PI;
+        self.rotationAngle = self.rotationAngle + gesture.rotation;
+//        gesture.rotation = 0;
+        self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, gesture.rotation);
+    }
+//    self.rotationAngle = self.rotationAngle>=M_PI ? M_PI : self.rotationAngle<=-M_PI ? -M_PI : self.rotationAngle;
+    NSLog(@"旋转的角度%f",change2Angle(self.rotationAngle));
+    _prerotationAngle = change2Angle(self.rotationAngle);
+    [_theRorationRullerView setDefaultValue:change2Angle(self.rotationAngle) animated:YES];
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+//        self.rotationAngle = rotation;
+    }
+    gesture.rotation = 0;
+    
+}
+
+
+#pragma mark - gesture delegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]]) {
+        return YES;
+    }else if ([gestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]]){
+        return YES;
+    }else{
+        return NO;
+    }
+    
+}
+
+
+@end
+

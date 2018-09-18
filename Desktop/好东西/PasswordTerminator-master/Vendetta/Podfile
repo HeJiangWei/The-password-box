@@ -1,0 +1,18 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, ’9.0’
+
+target 'Vendetta' do
+
+#pod 'Masonry'
+#
+#pod 'Masonry', '~> 1.0.2' #代码自动布局工具
+
+pod 'KVNProgress', '~> 2.3.1'
+pod 'Toast', '~> 3.1.0'
+pod 'AFNetworking'
+
+#pod 'JPush', '~> 3.0.9'
+#
+#pod 'BmobSDK'
+   pod 'MBProgressHUD'
+end

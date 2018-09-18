@@ -1,0 +1,25 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+inhibit_all_warnings!
+
+target 'TechProject' do
+    
+  pod 'MagicalRecord'
+  pod 'MJRefresh'
+  pod 'Masonry'
+  pod 'MBProgressHUD'
+  pod 'KVOController'
+  pod 'IQKeyboardManager'
+  pod 'YYCategories'
+  pod 'lottie-ios'
+  pod 'AFNetworking'
+     pod 'SVProgressHUD', '~> 2.0.4'
+     pod 'YYWebImage', '~> 1.0.5' #图片加载工具
+     pod 'MJExtension', '~> 3.0.13'
+     
+     pod 'JPush', '~> 3.0.9'
+     
+     pod 'BmobSDK'
+
+     
+end

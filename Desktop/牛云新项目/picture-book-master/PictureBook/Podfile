@@ -1,0 +1,32 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'PictureBook' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+  
+  # Pods for PictureBook
+    pod 'Firebase/Core'
+#    pod 'Google-Mobile-Ads-SDK','~>7.29.0'
+    pod 'UMengAnalytics-NO-IDFA'
+    pod 'Masonry'
+    pod 'MJExtension'
+    pod 'AFNetworking', '~> 3.2'
+    pod 'SVProgressHUD'
+    pod 'SDWebImage', '~> 4.0'
+    
+    pod 'MJRefresh'
+       pod 'PYSearch', '~> 0.3.5'
+       pod 'IQKeyboardManager', '~> 4.0.7'  #主动管理键盘工具
+    
+  target 'PictureBookTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'PictureBookUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
